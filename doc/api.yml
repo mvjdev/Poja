@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  version: 'latest'
+  title: HEI Admin API
+  description: |
+
+servers:
+  - url: 'https://api-dev.hei.school'
+  - url: 'https://api-prod.hei.school'
+
+security:
+  - BearerAuth: [ ]
+
+paths:
+  '/health/db':
+    get:
+      tags:
+        - Health
+      summary: Check database health.
+      operationId: dummyTable_should_not_be_empty
+      responses:
+        '200':
+          description: Return OK if database is ready else KO
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
+  '/dummies':
+    get:
+      tags:
+        - Dummy
+      summary: get dummies
+      operationId: getDummies
+      responses:
+        '200':
+          description: Return OK if database is ready else KO
+          $ref: "#/components/schemas/Dummy"
+  '/persons':
+    get:
+      tags:
+        - Persons
+      summary: get persons
+      operationId: getPersons
+      responses:
+        '200':
+          description: Return OK if database is ready else KO
+          content:
+            $ref: "#/components/schemas/Person"
+components:
+  schemas:
+    Dummy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+    Person:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
